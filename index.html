@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>서로 조금 가까워지는 시간</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    textarea {
+      width: 100%;
+      height: 60px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>서로 조금 가까워지는 시간</h1>
+
+  <form id="questionForm">
+    <div class="question"><label>1. 성함이 어떻게 되세요? 😊</label><textarea></textarea></div>
+<div class="question"><label>2. 몇학년 몇반이세요? 🎒</label><textarea></textarea></div>
+<div class="question"><label>4. 좋아하시는 음식은 무엇인가요? 🍜</label><textarea></textarea></div>
+<div class="question"><label>5. 요즘 가장 재미있거나 즐거운 일은 무엇인가요? 🎉</label><textarea></textarea></div>
+<div class="question"><label>6. 쉬는 날엔 보통 무엇을 하세요? 🛌</label><textarea></textarea></div>
+<div class="question"><label>7. 좋아하는 가수가 있으신가요? 🎤</label><textarea></textarea></div>
+<div class="question"><label>8. 지금까지 해보신 일 중 가장 기억에 남는 일은 무엇인가요? 🌟</label><textarea></textarea></div>
+<div class="question"><label>10. 요즘 자주 듣는 노래나 좋아하는 노래 있으세요? 🎵</label><textarea></textarea></div>
+<div class="question"><label>11. 좋아하는 계절은? 🍁</label><textarea></textarea></div>
+<div class="question"><label>12. 평소 자주 하시는 운동이나 활동이 있나요? 🏃</label><textarea></textarea></div>
+<div class="question"><label>13. 여행을 간다면 어디로 가보고 싶으세요? ✈️</label><textarea></textarea></div>
+<div class="question"><label>14. 요즘 관심 있는 것, 배우고 싶은 것이 있나요? 💡</label><textarea></textarea></div>
+<div class="question"><label>16. 마음이 편안해질 때는 언제인가요? 🧘</label><textarea></textarea></div>
+<div class="question"><label>17. 살면서 "이건 참 잘했다" 싶은 일이 있나요? 👍</label><textarea></textarea></div>
+<div class="question"><label>18. 내가 기분이 좋을 때는? 🌈</label><textarea></textarea></div>
+<div class="question"><label>19. 나를 한 마디로 표현한다면? 🧩</label><textarea></textarea></div>
+<div class="question"><label>20. 이 수업에서 기대되는 점이나 바라는 점이 있나요? 📚</label><textarea></textarea></div>
+
+    <button type="button" onclick="downloadAnswers()">제출</button>
+  </form>
+
+  <script>
+    function downloadAnswers() {
+      const textareas = document.querySelectorAll("textarea");
+      let content = "";
+
+      textareas.forEach((ta) => {
+        const answer = ta.value.trim();
+        if (answer) {
+          content += ${answer}\n\n;
+        }
+      });
+
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "답변만_모음.txt";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
