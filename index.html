@@ -133,13 +133,15 @@
   <button id="downloadBtn">다운로드</button>
 
   <script>
-    document.getElementById('downloadBtn').addEventListener('click', function() {
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+      var titleInput = document.querySelector('input[placeholder*="예: 폴라의 얼음 집이 사라졌어요!"]');
+      var filename = titleInput && titleInput.value.trim() ? titleInput.value.trim() : '제목';
       var content = '';
       content += document.querySelector('.guide-box').innerText + '\n\n';
-      document.querySelectorAll('.section').forEach(function(section) {
+      document.querySelectorAll('.section').forEach(function (section) {
         var heading = section.querySelector('h2').innerText;
         content += heading + '\n';
-        section.querySelectorAll('input, textarea, select').forEach(function(el) {
+        section.querySelectorAll('input, textarea, select').forEach(function (el) {
           var val = el.value.trim();
           if (val) {
             content += val + '\n';
@@ -148,14 +150,14 @@
         content += '\n';
       });
 
-      var blob = new Blob([content], { type: 'text/plain' });
+      // ✅ 한글 깨짐 방지용 BOM 포함
+      var blob = new Blob(['\uFEFF' + content], { type: 'text/plain;charset=utf-8' });
       var a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-
-      // ✅ 파일 이름을 'bookcreator.txt'로 고정
-      a.download = 'bookcreator.txt';
-
+      a.download = filename + '.txt';
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
     });
   </script>
 </body>
